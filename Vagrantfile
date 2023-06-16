@@ -9,9 +9,21 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/focal64"
   config.vm.network "public_network", bridge: "Intel(R) Wi-Fi 6 AX201 160MHz"
   config.vm.network "public_network", ip: "192.168.1.64"
-  config.vm.network "forwarded_port", guest: 80, host: 8090
-  config.vm.provision "shell", 
-  path: "script.sh"
+  config.vm.provision "shell", inline: <<-SHELL 
+  apt update -y
+  
+  apt install vim -y 
+  apt install curl -y 
+  apt install net-tools -y 
+  apt install telnet -y 
+  apt install unzip -y
+  apt install wget -y 
+  apt install htop -y 
+  apt install nmap -y
+
+  hostnamectl set-hostname Projeto01
+  sudo adduser "raphaelsiston"
+  SHELL
 
   
 end
